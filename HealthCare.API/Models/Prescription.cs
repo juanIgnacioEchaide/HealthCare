@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using HealthCare.API.Interfaces;
 
-namespace ConsoleApp1
+namespace HealthCare.API.Models
 {
-    class Prescription
+    public class Prescription 
     {
         private long ID { get; set; }
+        private Patient Patient { get; set; }
         private int PrescriptionNumber { get; set; }
         private Physician PrecriptorPhysician { get; set; }
         private HealthCareProvider HealthCareProvider { get; set; }
         private bool UnderHCCoverage { get; set; }
         private String Medication { get; set; }
 
-        public Prescription()
-        {
-
-        }
     }
 }

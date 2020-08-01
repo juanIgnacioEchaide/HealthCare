@@ -2,21 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleApp1
+namespace HealthCare.API.Models
 {
-    class Physician
+    public class Physician : BasePerson
     {
-        private long ID { get; set; }
-        private int LegalID { get; set; }
-        private String Email { get; set; }
-        private String FirstName { get; set; }
-        private String LastName { get; set; }
-        private String Address { get; set; }
-        private String Matricule { get; set; }
-
-        public Physician()
-        {
-
-        }
+        private long ID { get; set; }        
+        public List<string> Licenses { get; set; }
+        public List<MedicalInstitution> Institutions { get; set; }
+        private  List<DateTime> DatesOfAttendance { get; set; }
+        private List<Patient> Patients {get;set;}
     }
 }

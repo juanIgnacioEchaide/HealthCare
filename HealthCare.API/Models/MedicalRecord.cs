@@ -1,26 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using HealthCare.API.Interfaces;
 
-namespace ConsoleApp1
+namespace HealthCare.API.Models
 {
-    class MedicalRecord
+    public  class MedicalRecord 
     {
-        private long ID;
-        private Patient Patient { get; }
-        private DateTime StartingDate { get; set; }
-        private DateTime ReportDate { get; set; }
-        private ICollection<MedicalRegistry> Registries { get; set; }
-        public int Quantity { get; private set; }
+        private  long ID;
+        private  Patient Patient { get; }
+        private  DateTime StartingDate { get; set; }
+        private  List<DateTime> DatesOfAttendance { get; set; }
+        private  List<MedicalRegistry> Registries { get; set; }
+        private  int Quantity { get; set; }
 
-          public MedicalRecord(ICollection<MedicalRegistry> _registries,Patient patient, DateTime dateTime) 
-            {
-            Registries = _registries;
-            }
-       
-
+    
     }
-
-  
-
 }

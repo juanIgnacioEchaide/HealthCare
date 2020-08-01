@@ -1,54 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using HealthCare.API.Models;
 
-namespace ConsoleApp1
+namespace HealthCare.API.Interfaces
 {
-   public interface IRegister
+    public interface IRegister<T> where T : class
     {
-        void createRegistry();
-        void deleteRegistry();
-        void updateRegistry();
-    }
-
-    public class ManageMedicalRegistry : IRegister
-    {
-       
-        public void createRegistry()
-        {
-            var createdRegistry = new MedicalRegistry() {
-            //Technician = ;
-            //Physician = ;
-            //Practice = ;
-            //AttentionDate = ;
-            //Institution = ;
-            //AttentionSummary = ;
-            //HealthCareProvider = ;
-            //UnderMedication = ;
-            };
-        }
-
-        public void deleteRegistry()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void checkUpdatedElement()
-        {
-            var updated = "";
-                
-        }
-        public void updateRegistry()
-        {
-            //Technician = (updated="technician") ?  : ;
-            //Physician = (updated="physician") ?  : ;
-            //Practice =  (updated="practice") ?  :;
-            //AttentionDate = (updated="date") ?  :;
-            //Institution = (updated="institution") ?  : ;
-            //AttentionSummary = (updated="summary") ?  :;
-            //HealthCareProvider = (updated="provider") ?  : ;
-            //UnderMedication = (updated="medicated") ?  : ;
-            throw new NotImplementedException();
-        }
+       T createRegistry(long Id);  
+       T updateRegistry(long Id);  
+       void deleteRegistry(long Id);
     }
 }

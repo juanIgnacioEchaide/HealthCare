@@ -1,21 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace ConsoleApp1
+namespace HealthCare.API.Models
 {
-    class HealthCareProvider
+    public class HealthCareProvider
     {
         private long ID { get; set; }
+        private List<Patient> patients;
         private String Name { get; set; }
         private String Email { get; set; }
         private IList<Int32> Telephones { get; set; }
         private String Address { get; set; }
         private String MedicalPlan { get; set; }
-
-        public HealthCareProvider()
-        {
-
-        }
     }
 }
