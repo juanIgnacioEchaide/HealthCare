@@ -35,5 +35,6 @@ namespace HealthCare.API.Controllers
             })
             .ToArray();
         }
+
     }
 }

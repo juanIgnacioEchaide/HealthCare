@@ -1,19 +1,27 @@
+/*using System;
+using System.Collections.Generic;
+using HealthCare.API.Builders;
 using HealthCare.API.Models;
 
 namespace HealthCare.API.Interfaces
 {
     public interface IMedicalRegistryBuilder{
-
-        MedicalRegistry withTechnician(Technician technician);
-        MedicalRegistry withPhysician(Physician physician);
-        MedicalRegistry withPractice(Practice practice); 
-        MedicalRegistry withAttentionDate(AttentionDate attentionDate); 
-        MedicalRegistry withInstitution(Institution institution); 
-        MedicalRegistry withAttentionSummary(AttentionSummary attentionSummary); 
-        MedicalRegistry withHealthCareProvider(HealthCareProvider healthCareProvider); 
-        MedicalRegistry withUnderMedication(UnderMedication underMedication); 
-        MedicalRegistry withPrescription(Prescription prescription); 
-        MedicalRegistry withPrescription(Prescription prescription); 
-        MedicalRegistry BuildMedicalRegistry(Prescription prescription); 
+ 
+        MedicalRegistryBuilder withPatient(Patient patient);  
+        MedicalRegistryBuilder withMedicalRecord(MedicalRecord medicalRecord);  
+        MedicalRegistryBuilder withTechnician(Technician technician);  
+        MedicalRegistryBuilder withPhysician(Physician physician);  
+        MedicalRegistryBuilder withPracticeType(PracticeType practice);  
+        MedicalRegistryBuilder withAttendace(Attendace attendace);  
+        MedicalRegistryBuilder withMedicalInstitution(MedicalInstitution institution);  
+        MedicalRegistryBuilder withAttentionSummary(AttentionSummary attentionSummary);  
+        MedicalRegistryBuilder withHealthCareProvider(HealthCareProvider healthCareProvider); 
+        MedicalRegistryBuilder withMedications(List<String> medications);
+        MedicalRegistryBuilder withPrescription(Prescription prescription); 
+        MedicalRegistryBuilder withDateOfAttendance(DateTime dateOfAttendance);
+        MedicalRegistryBuilder withUnit(Unit unit);
+        MedicalRegistryBuilder withHospitalization(Hospitalization hospitalization);
+        MedicalRegistry buildMedicalRegistry();
     }
 }
+*/

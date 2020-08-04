@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections.Generic;
 using HealthCare.API.Interfaces;
 using HealthCare.API.Models;
@@ -32,4 +32,4 @@ namespace HealthCare.API.Repositories
             throw new NotImplementedException();
         }
     }
-}
+}*/

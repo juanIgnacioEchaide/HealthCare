@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using HealthCare.API.Interfaces;
-using HealthCare.API.Models;
+using HealthCare.API.Model;
 
 namespace HealthCare.API.Repositories
 {

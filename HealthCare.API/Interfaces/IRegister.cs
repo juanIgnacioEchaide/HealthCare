@@ -1,4 +1,4 @@
-using HealthCare.API.Models;
+using HealthCare.API.Model;
 
 namespace HealthCare.API.Interfaces
 {
