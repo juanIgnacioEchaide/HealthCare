@@ -1,15 +1,17 @@
 using System;
 using System.Collections.Generic;
+using HealthCare.API.Model;
 
 namespace HealthCare.API.Interfaces
 {
-    public interface IPersonRepository<T> where T : class
+    public interface IMedicalRegistryRepository
     {
-         T getById(long id);
-         T getByLegalId(long id);
-         List<T> getAllByHCId(long id);
-         List<T> getAllByInstitutionId(long id);
-         List<T> getByDateOfAttendance(DateTime date);
+        
+         ICollection<MedicalRegistry> getByPatientId(int patientId);
+         ICollection<MedicalRegistry> getByCertainDate(int patientId,DateTime date);
+         ICollection<MedicalRegistry> GetFromTo(int patientId,DateTime From, DateTime To);
+         ICollection<MedicalRegistry> getByPhysicianAndPatient(int physicianId,int patientId);
+         
 
     }
 }

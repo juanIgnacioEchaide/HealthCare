@@ -9,6 +9,7 @@ namespace HealthCare.API.Data
         DbSet<Patient> patients {get; set;}
         DbSet<Physician> physicians {get; set;}
         DbSet<HealthCareProvider> healthCareProviders {get; set;}
-        DbSet<MedicalRecord> medicalRecords {get; set;}
+        DbSet<MedicalRecord> medicalRecords {get; set;}   
+        DbSet<MedicalRegistry> medicalRegistries {get; set;}
     }
 }

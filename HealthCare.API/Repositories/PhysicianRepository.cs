@@ -5,7 +5,7 @@ using HealthCare.API.Model;
 
 namespace HealthCare.API.Repositories
 {
-    public class PhysicianRepository : IPersonRepository<Physician>
+    public class PhysicianRepository 
     {
         public List<Physician> getAllByHCId(long id)
         {

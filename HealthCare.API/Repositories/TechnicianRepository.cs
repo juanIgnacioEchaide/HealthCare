@@ -1,11 +1,11 @@
-/*using System;
+using System;
 using System.Collections.Generic;
 using HealthCare.API.Interfaces;
-using HealthCare.API.Models;
+using HealthCare.API.Model;
 
 namespace HealthCare.API.Repositories
 {
-    public class TechnicianRepository : IPersonRepository<Technician>
+    public class TechnicianRepository 
     {
         public List<Technician> getAllByHCId(long id)
         {
@@ -32,4 +32,4 @@ namespace HealthCare.API.Repositories
             throw new NotImplementedException();
         }
     }
-}*/
+}

@@ -4,9 +4,16 @@ using System.Text;
 
 namespace HealthCare.API.Model
 {
-    public class Patient : BasePerson
+    public class Patient 
     {
         public int ID { get; set; }
+        private int LegalId { get; set; }
+        private int SocialSecurityNumber { get; set; }
+        private String Email { get; set; }
+        private String FirstName { get; set; }
+        private String LastName { get; set; }
+        private byte Age { get; set; }
+        private String Address { get; set; }
 
         //medical data
         public HealthCareProvider CurrentHCProvider { get; set; }

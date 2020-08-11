@@ -6,6 +6,7 @@ namespace HealthCare.API.Model
         public Patient Patient { get; set; }
         public HealthCareProvider HealthCareProvider { get; set; }
         public Physician Physician { get; set; }
+        public Technician Technician  { get; set; }
         public string Summary { get; set; }
     }
 }
