@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using HealthCare.API.Data;
 /* using HealthCare.API.DTO; */
 using HealthCare.API.Model;
 using HealthCare.API.Services;
@@ -13,20 +15,16 @@ namespace HealthCare.API.Controllers
     public class MedicalRegistryController : ControllerBase
     {
         private readonly IConfiguration _config;
-  /*       private readonly RegisterMedicalRegistry _registryService; */
+        private readonly DataContext _context;
         public MedicalRegistryController(IConfiguration config)
         {
             _config = config;
         }
 
-        //Todo make async and return 201 if ok 
-/*         [HttpPost]
-        public IActionResult CreateRegistry(MedicalRegistryForCreateDTO dto)
+  /*    [HttpGet]
+        public IEnumerable<MedicalRegistry> Get()
         {
-            var createdRegistry = _registryService.createRegistry(dto);
-
-            Console.WriteLine(createdRegistry);
-            return StatusCode(201); 
+            return 
         } */
     }
 }

@@ -4,13 +4,14 @@ using HealthCare.API.Model;
 
 namespace HealthCare.API.Interfaces
 {
-    public interface IMedicalRegistryRepository
+    public interface IRepository<T> where T: class
     {
         
-         ICollection<MedicalRegistry> getByPatientId(int patientId);
-         ICollection<MedicalRegistry> getByCertainDate(int patientId,DateTime date);
-         ICollection<MedicalRegistry> GetFromTo(int patientId,DateTime From, DateTime To);
-         ICollection<MedicalRegistry> getByPhysicianAndPatient(int physicianId,int patientId);
+        T getById(int registryId);
+         ICollection<T> getByPatientId(int patientId);
+         ICollection<T> getSince(int patientId,DateTime date);
+         ICollection<T> GetFromToDate(int patientId,DateTime From, DateTime To);
+         ICollection<T> getByProfessionalAndPatient(int professionalId,int patientId);
          
 
     }

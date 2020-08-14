@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using HealthCare.API.Data;
 using HealthCare.API.Interfaces;
 using HealthCare.API.Model;
 
@@ -7,29 +9,53 @@ namespace HealthCare.API.Repositories
 {
     public class PhysicianRepository 
     {
-        public List<Physician> getAllByHCId(long id)
+        private readonly DataContext _context;
+
+        public PhysicianRepository(DataContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public List<Physician> getAllByInstitutionId(long id)
-        {
-            throw new NotImplementedException();
-        }
+        public Physician getById(int physicianId)
+        => this._context.Physicians
+        .Where( p => p.Id == physicianId)
+        .FirstOrDefault();
 
-        public List<Physician> getByDateOfAttendance(DateTime date)
-        {
-            throw new NotImplementedException();
-        }
+        public Physician getByLicense(string license)
+        => this._context.Physicians
+        .Where( p => p.License == license)
+        .FirstOrDefault();
+        
+        public Physician getByFullName(string firstName, string lastName)
+        => this._context.Physicians
+        .Where( p => p.FirstName == firstName && p.LastName == lastName)
+        .FirstOrDefault();
 
-        public Physician getById(long id)
-        {
-            throw new NotImplementedException();
-        }
+        public ICollection<Physician> getBySpecialty(string specialty)
+        => this._context.Physicians
+        .Where(p => p.Specialty == specialty) 
+        .ToList();
 
-        public Physician getByLegalId(long id)
-        {
-            throw new NotImplementedException();
-        }
+/*         public ICollection<Physician> getPhysiciansByPatientId(int patientId)
+        => this._context.Physicians
+        .FirstOrDefault().Patients
+        .Where(p => p.Id == patientId)
+        .FirstOrDefault().physicians
+        .ToList();
+
+        public ICollection<Physician> getPhysiciansByPatientFullName(string firstName, string lastName)
+            => this._context.Physicians
+            .FirstOrDefault().Patients
+            .Where(p => p.FirstName == firstName && 
+                p.LastName == lastName)
+            .FirstOrDefault().physicians
+            .ToList();
+       
+       public ICollection<Physician> getPhysiciansByPatientHCCredentialNumber(int credentialNumber)
+            => this._context.Physicians
+            .FirstOrDefault().Patients
+            .Where(p => p.HCCredentialNumber == credentialNumber)
+            .FirstOrDefault().physicians
+            .ToList(); */
     }
 }

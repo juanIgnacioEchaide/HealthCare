@@ -6,12 +6,11 @@ namespace HealthCare.API.Model
 {
     public class Patient 
     {
-        public int ID { get; set; }
-        private int LegalId { get; set; }
-        private int SocialSecurityNumber { get; set; }
+        public int Id { get; set; }
+        public int SocialSecurityNumber { get; set; }
         private String Email { get; set; }
-        private String FirstName { get; set; }
-        private String LastName { get; set; }
+        public String FirstName { get; set; }
+        public String LastName { get; set; }
         private byte Age { get; set; }
         private String Address { get; set; }
 
@@ -19,5 +18,7 @@ namespace HealthCare.API.Model
         public HealthCareProvider CurrentHCProvider { get; set; }
         public MedicalRecord MedicalRecord { get; set; }
         public int HCCredentialNumber { get; set; }
+        public ICollection<PatientPhysician> physicians {get;set;}
+        public List<PatientTechnician> technicians {get;set;}
     }
 }
