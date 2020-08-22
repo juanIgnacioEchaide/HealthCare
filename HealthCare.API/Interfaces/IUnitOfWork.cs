@@ -1,14 +1,15 @@
 using System;
+using HealthCare.API.Repositories;
 
 namespace HealthCare.API.Interfaces
 {
-    public interface IUnitOfWork: IDisposable
+    public interface IUnitOfWork
     {
-        IPatientRepository PatientRepository {get;};
-        ITechnicianRepository TechnicianRepository {get;}
-        IPhysicianRepository PhysicianRepository {get;}
-        void Commit();
-        void Rollback();
+        IPatientRepository PatientRepository {get;}
+        TechnicianRepository TechnicianRepository {get;}
+        PhysicianRepository PhysicianRepository {get;}
+        int Commit();
         void DetectChanges();
+        void Rollback();
     }
 }

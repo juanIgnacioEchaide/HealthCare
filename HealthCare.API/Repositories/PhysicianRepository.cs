@@ -7,7 +7,7 @@ using HealthCare.API.Model;
 
 namespace HealthCare.API.Repositories
 {
-    public class PhysicianRepository 
+    public class PhysicianRepository : IPhysicianRepository 
     {
         private readonly DataContext _context;
 
@@ -36,26 +36,11 @@ namespace HealthCare.API.Repositories
         .Where(p => p.Specialty == specialty) 
         .ToList();
 
-/*         public ICollection<Physician> getPhysiciansByPatientId(int patientId)
-        => this._context.Physicians
-        .FirstOrDefault().Patients
-        .Where(p => p.Id == patientId)
+         public ICollection<PatientPhysician> getPhysiciansByPatientId(int patientId)
+        => this._context.Patients
         .FirstOrDefault().physicians
+        .Where(p => p.PatientId == patientId)
         .ToList();
 
-        public ICollection<Physician> getPhysiciansByPatientFullName(string firstName, string lastName)
-            => this._context.Physicians
-            .FirstOrDefault().Patients
-            .Where(p => p.FirstName == firstName && 
-                p.LastName == lastName)
-            .FirstOrDefault().physicians
-            .ToList();
-       
-       public ICollection<Physician> getPhysiciansByPatientHCCredentialNumber(int credentialNumber)
-            => this._context.Physicians
-            .FirstOrDefault().Patients
-            .Where(p => p.HCCredentialNumber == credentialNumber)
-            .FirstOrDefault().physicians
-            .ToList(); */
     }
 }

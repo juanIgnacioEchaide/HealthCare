@@ -41,15 +41,16 @@ namespace HealthCare.API.Repositories
             => this._context.Patients
             .Where(p => p.HCCredentialNumber == credentialNumber)
             .FirstOrDefault();
- /*        public ICollection<Patient> getByPhysicianId(int physicianId)
-            => this._context.Physicians
-            .Where(p => p.Id == physicianId)
-            .FirstOrDefault()
-            .Patients;
-        public ICollection<Patient> getByPhysicianSpecialty(string specialty)
-            => this._context.Physicians
-            .Where(p => p.Specialty == specialty)
-            .FirstOrDefault()
-            .Patients; */
+
+         
+        public ICollection<PatientPhysician> getPatientsByPhysicianId(int physicianId)
+        => this._context.Physicians
+        .FirstOrDefault().Patients
+        .Where(p => p.PhysicianId== physicianId)
+        .ToList();
+
+        public ICollection<Patient> getAllPatients()
+        => this._context.Patients
+        .ToList();
     }
 }

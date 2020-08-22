@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using HealthCare.API.Data;
 using HealthCare.API.DTO;
 using HealthCare.API.Model;
@@ -12,8 +13,7 @@ namespace HealthCare.API.Controllers
     public class PatientController : ControllerBase
     {
         private readonly IConfiguration _config;
-        private readonly DataContext _context;
-        private readonly PatientRepository _patientRepo;
+        private readonly UnitOfWork _uow;
         
         public PatientController(IConfiguration configuration)
         {
@@ -21,12 +21,19 @@ namespace HealthCare.API.Controllers
         }
 
         [HttpGet]
-        public Patient getPatientForRegistry(MedicalRegistryForCreateDTO dto)
-        {
-            
-            var registryPatient = _patientRepo.getByPatientId(dto.Patient.Id);
+        public ActionResult<ICollection<Patient>> getAllPatients(){
 
-            return registryPatient;
+            var patients = _uow.PatientRepository.getAllPatients();
+
+            return Ok(patients);
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult getPatientById(int id)
+        {          
+            var patient = _uow.PatientRepository.getByPatientId(id);
+            
+            return Ok(patient);
         }
     }
 }

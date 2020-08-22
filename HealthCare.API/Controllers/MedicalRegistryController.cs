@@ -16,15 +16,12 @@ namespace HealthCare.API.Controllers
     {
         private readonly IConfiguration _config;
         private readonly DataContext _context;
+       
         public MedicalRegistryController(IConfiguration config)
         {
             _config = config;
         }
 
-  /*    [HttpGet]
-        public IEnumerable<MedicalRegistry> Get()
-        {
-            return 
-        } */
+   
     }
 }

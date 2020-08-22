@@ -1,3 +1,4 @@
+using System;
 using HealthCare.API.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,6 +41,7 @@ namespace HealthCare.API.Data
                 .HasOne(pp => pp.Patient)
                 .WithMany(pp => pp.technicians)
                 .HasForeignKey(pp => pp.TechnicianId);      
-        }  
+        }
+       
     }
 }

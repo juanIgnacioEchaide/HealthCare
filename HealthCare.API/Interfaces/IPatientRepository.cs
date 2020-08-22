@@ -10,6 +10,7 @@ namespace HealthCare.API.Interfaces
         Patient getByPatientFullName(string firstName, string lastName);
         ICollection<Patient> getByHCProviderName(string provider);  
         Patient getByMedicalRecordId(int recordId);
+        ICollection<Patient> getAllPatients();
       
     }
 }

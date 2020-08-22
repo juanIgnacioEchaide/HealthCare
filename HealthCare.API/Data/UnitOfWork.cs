@@ -3,52 +3,45 @@ using HealthCare.API.Repositories;
 
 namespace HealthCare.API.Data
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork  : IUnitOfWork
     {
         private readonly DataContext _context;
-        private IPatientRepository _patientRepository {get;};
-        private ITechnicianRepository _technicianRepository {get;}
-        private IPhysicianRepository _physicianRepository {get;}
-
-        public UnitOfWork(DataContext context,PatientRepository PatientRepository)
+        public UnitOfWork(
+            DataContext context,
+            IPatientRepository patientRepository,
+            ITechnicianRepository technicianRepository,
+            IPhysicianRepository physicianRepository
+            )
         {
-         _context = context;   
+        _context = context; 
+        this.PatientRepository = patientRepository;
+        this.TechnicianRepository = technicianRepository;
+        this.PhysicianRepository = physicianRepository;
         }
 
-        public IPatientRepository PatientRepository 
-        {
-            get { return _patientRepository = _patientRepository ??
-                 new PatientRepository(_context);
-                }
-        } 
 
-        public ITechnicianRepository TechnicianRepository 
-        {
-            get { return _technicianRepository = _technicianRepository ??
-                 new TechnicianRepository(_context);
-                }
-        } 
-        
-        public IPhysicianRepository PhysicianRepository 
-        {
-            get { return _physicianRepository = _physicianRepository ??
-                 new PhysicianRepository(_context);
-                }
-        }
+        public IPatientRepository PatientRepository { get; internal set;}
+        public ITechnicianRepository TechnicianRepository {get; internal set;}
+        public IPhysicianRepository PhysicianRepository {get; internal set;}
 
-        public void Commit()
+        TechnicianRepository IUnitOfWork.TechnicianRepository => throw new System.NotImplementedException();
+
+        PhysicianRepository IUnitOfWork.PhysicianRepository => throw new System.NotImplementedException();
+
+        public int Commit()
         {
-            _context.SaveChanges();
+           return this._context.SaveChanges();
         }
 
         public void DetectChanges()
         {
-            _context.DetectChanges();
+            this._context.ChangeTracker.DetectChanges();
         }
 
         public void Rollback()
         {
             _context.Dispose();
         }
-    }
+
+     }
 }
