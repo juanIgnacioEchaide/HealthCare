@@ -8,5 +8,6 @@ namespace HealthCare.API.Model
         public Physician Physician { get; set; }
         public Technician Technician  { get; set; }
         public string Summary { get; set; }
+        public DateTime Date  {get;set;}
     }
 }

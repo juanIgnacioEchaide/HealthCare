@@ -7,12 +7,12 @@ namespace HealthCare.API.Services
     public class RegisterMedicalRegistry 
     {
         //Todo call 'await unitOfWork.SaveRegistry();
-        public MedicalRegistry createRegistry(MedicalRegistryForCreateDTO dto)
+    /*     public MedicalRegistry createRegistry(MedicalRegistryForCreateDTO dto)
         {       
-        //declaration of builder
+     
         var _builder = new MedicalRegistryBuilder();
 
-        //instance of builder with dto's data
+        
         MedicalRegistry newMedicalRegistry = _builder
         . withPatient(dto.Patient) 
         . withTechnician(dto.Technician)  
@@ -21,7 +21,7 @@ namespace HealthCare.API.Services
         .buildMedicalRegistry();
 
         return newMedicalRegistry;
-        }
+        } */
 
         public void deleteRegistry(long Id)
         {
