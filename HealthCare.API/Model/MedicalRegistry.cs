@@ -1,8 +1,11 @@
+using System;
+
 namespace HealthCare.API.Model
 {
     public class MedicalRegistry
     {
         public int Id { get; set; }
+        public int MedicalRecordId {get;set;}
         public Patient Patient { get; set; }
         public HealthCareProvider HealthCareProvider { get; set; }
         public Physician Physician { get; set; }

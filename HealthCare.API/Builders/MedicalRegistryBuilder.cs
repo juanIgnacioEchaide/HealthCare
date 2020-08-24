@@ -62,6 +62,7 @@ namespace HealthCare.API.Builders
                         {
                         Patient = _patient,
                         Physician =_physician,
+                        MedicalRecordId = _medicalRecord.Id,
                         Technician= _technician,
                         Date =_date,
                         HealthCareProvider = _healthCareProvider,

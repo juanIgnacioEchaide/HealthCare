@@ -31,9 +31,12 @@ namespace HealthCare.API
         {
             services.AddControllers();
             services.AddDbContext<DataContext>(x=>x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<PatientRepository>();
-            services.AddScoped<PhysicianRepository>();
-            services.AddScoped<TechnicianRepository>();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            services.AddCors();
+            services.AddScoped<IUnitOfWork,UnitOfWorl>();
+            services.AddScoped<IPatientRepository,PatientRepository>();
+            services.AddScoped<IPhysicianRepository,PhysicianRepository>();
+            services.AddScoped<ITechnicianRepository,TechnicianRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,12 +45,17 @@ namespace HealthCare.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }else{
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();  
             }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
+            app.UseCors(x=> x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); 
+         
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
