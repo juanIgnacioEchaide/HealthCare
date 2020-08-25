@@ -31,6 +31,9 @@ namespace HealthCare.API
             services.AddScoped<IPatientRepository,PatientRepository>();
             services.AddScoped<IPhysicianRepository,PhysicianRepository>();
             services.AddScoped<ITechnicianRepository,TechnicianRepository>();
+            services.AddScoped<IMedicalRecordRepository,MedicalRecordRepository>();
+            services.AddScoped<IMedicalRegistryRepository,MedicalRegistryRepository>();
+            services.AddScoped<IHealthCareProviderRepository,HealthCareProviderRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

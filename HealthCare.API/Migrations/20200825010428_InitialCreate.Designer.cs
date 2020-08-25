@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthCare.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200814012838_InitialCreate")]
+    [Migration("20200825010428_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,10 +70,13 @@ namespace HealthCare.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
                     b.Property<int?>("HealthCareProviderId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("MedicalRecordId")
+                    b.Property<int>("MedicalRecordId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("PatientId")
@@ -254,7 +257,9 @@ namespace HealthCare.API.Migrations
 
                     b.HasOne("HealthCare.API.Model.MedicalRecord", null)
                         .WithMany("MedicalRegistries")
-                        .HasForeignKey("MedicalRecordId");
+                        .HasForeignKey("MedicalRecordId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("HealthCare.API.Model.Patient", "Patient")
                         .WithMany()

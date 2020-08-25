@@ -163,12 +163,13 @@ namespace HealthCare.API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    MedicalRecordId = table.Column<int>(nullable: false),
                     PatientId = table.Column<int>(nullable: true),
                     HealthCareProviderId = table.Column<int>(nullable: true),
                     PhysicianId = table.Column<int>(nullable: true),
                     TechnicianId = table.Column<int>(nullable: true),
                     Summary = table.Column<string>(nullable: true),
-                    MedicalRecordId = table.Column<int>(nullable: true)
+                    Date = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -184,7 +185,7 @@ namespace HealthCare.API.Migrations
                         column: x => x.MedicalRecordId,
                         principalTable: "MedicalRecords",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_MedicalRegistries_Patients_PatientId",
                         column: x => x.PatientId,

@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace HealthCare.API.Repositories
 {
-    public class MedicalRegistryRepository: IMedicalRecordRepository
+    public class MedicalRegistryRepository: IMedicalRegistryRepository
     {
         private readonly DataContext _context;
         
