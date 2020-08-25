@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HealthCare.API.Data;
+using HealthCare.API.Interfaces;
 using HealthCare.API.Repositories;
 using HealthCare.API.Services;
 using Microsoft.AspNetCore.Builder;
@@ -33,7 +34,7 @@ namespace HealthCare.API
             services.AddDbContext<DataContext>(x=>x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddCors();
-            services.AddScoped<IUnitOfWork,UnitOfWorl>();
+            services.AddScoped<IUnitOfWork,UnitOfWork>();
             services.AddScoped<IPatientRepository,PatientRepository>();
             services.AddScoped<IPhysicianRepository,PhysicianRepository>();
             services.AddScoped<ITechnicianRepository,TechnicianRepository>();
