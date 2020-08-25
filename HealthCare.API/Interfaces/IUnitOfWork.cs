@@ -6,8 +6,13 @@ namespace HealthCare.API.Interfaces
     public interface IUnitOfWork
     {
         IPatientRepository PatientRepository {get;}
-        TechnicianRepository TechnicianRepository {get;}
-        PhysicianRepository PhysicianRepository {get;}
+        IPhysicianRepository PhysicianRepository {get;}
+        ITechnicianRepository TechnicianRepository { get;}
+        IMedicalRecordRepository MedicalRecordRepository { get; }
+        IMedicalRegistryRepository MedicalRegistryRepository { get;}
+
+
+
         int Commit();
         void DetectChanges();
         void Rollback();

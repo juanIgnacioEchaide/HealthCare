@@ -1,10 +1,11 @@
 using System;
 using HealthCare.API.Data;
+using HealthCare.API.Interfaces;
 using HealthCare.API.Model;
 
 namespace HealthCare.API.Builders
 {
-    public class MedicalRegistryBuilder
+    public class MedicalRegistryBuilder : IMedicalRegistryBuilder
     {
         private readonly UnitOfWork _uow;
         private Patient _patient;
@@ -21,17 +22,19 @@ namespace HealthCare.API.Builders
                                      //dispara el patient service 'crea el patient'
         }
 
-        public MedicalRecord checkForMedicalRecord(int recordId)
+        public MedicalRecord checkForMedicalRecord(int patientId)
         {
-            return _medicalRecord; 
-                /* _medicalRecord = _uow.MedicalRecordRepository.getById(recordId)?? 
-                    llamo al builder de MR y paso props de _patient, _ap*/
+            return _medicalRecord = _uow.MedicalRecordRepository.GetMedicalRecordByPatientId(patientId)??
+                                    new MedicalRecord(){
+                                        PatientId = patientId,
+                                        StartingDate = DateTime.Now                                   
+                                    };
         }
-/* 
+
         public HealthCareProvider withHealthCareProvider(int providerId)
         {
-            return _healthCareProvider = _uow.HealthCareProviderRepositor.GetById(providerId);
-        } */
+            return _healthCareProvider = _uow.HealthCareProviderRepository.GetById(providerId);
+        } 
         public Physician withPhysician(int physicianId)
         {
             return   physicianId.ToString() == null ?

@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace HealthCare.API.Repositories
 {
-    public class MedicalRegistryRepository 
+    public class MedicalRegistryRepository: IMedicalRecordRepository
     {
         private readonly DataContext _context;
         
@@ -16,15 +16,26 @@ namespace HealthCare.API.Repositories
         {
             _context = context;
         }
-        public ICollection<MedicalRegistry> getById(int recordId) 
+        public MedicalRegistry getById(int recordId) 
             => this._context.MedicalRegistries
             .Where( m => m.Id == recordId)
-            .OrderByDescending(m => m.Date)
-            .ToList();
+            .FirstOrDefault();
 
-        public ICollection<MedicalRegistry> getByTimePeriod(DateTime fromDate, DateTime toDate) 
+        public MedicalRecord GetMedicalRecordByPatientId(int patientId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ICollection<MedicalRegistry> getPatientMedicalRegistries(int patientId) 
         => this._context.MedicalRegistries
-        .Where(m =>  m.Date >= fromDate && m.Date <= toDate)
+        .Where(p => p.Patient.Id == patientId)
+        .OrderByDescending(m => m.Date)
+        .ToList();
+
+        public ICollection<MedicalRegistry> getPatientRecordForTimePeriod(int patientId,DateTime fromDate, DateTime toDate) 
+        => this._context.MedicalRegistries
+        .Where(m =>  (m.Date >= fromDate && m.Date <= toDate) &&
+                      m.Patient.Id == patientId)
         .OrderByDescending(m => m.Date)  
         .ToList(); 
     }

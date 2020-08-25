@@ -10,23 +10,29 @@ namespace HealthCare.API.Data
             DataContext context,
             IPatientRepository patientRepository,
             ITechnicianRepository technicianRepository,
-            IPhysicianRepository physicianRepository
+            IPhysicianRepository physicianRepository,
+            IMedicalRecordRepository medicalRecordRepository,
+            IMedicalRegistryRepository medicalRegistryRepository,
+            IHealthCareProviderRepository healthCareProviderRepository
             )
         {
         _context = context; 
         this.PatientRepository = patientRepository;
-        this.TechnicianRepository = technicianRepository;
         this.PhysicianRepository = physicianRepository;
+        this.TechnicianRepository = technicianRepository;
+        this.MedicalRecordRepository = medicalRecordRepository;
+        this.MedicalRegistryRepository = medicalRegistryRepository;
+        this.HealthCareProviderRepository = healthCareProviderRepository;
         }
 
 
         public IPatientRepository PatientRepository { get; internal set;}
         public ITechnicianRepository TechnicianRepository {get; internal set;}
         public IPhysicianRepository PhysicianRepository {get; internal set;}
+        public IMedicalRecordRepository MedicalRecordRepository { get; internal set; }
+        public IMedicalRegistryRepository MedicalRegistryRepository { get; internal set; }
+        public IHealthCareProviderRepository HealthCareProviderRepository { get; internal set; }
 
-        TechnicianRepository IUnitOfWork.TechnicianRepository => throw new System.NotImplementedException();
-
-        PhysicianRepository IUnitOfWork.PhysicianRepository => throw new System.NotImplementedException();
 
         public int Commit()
         {
