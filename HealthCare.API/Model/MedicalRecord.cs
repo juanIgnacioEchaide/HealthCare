@@ -9,7 +9,7 @@ namespace HealthCare.API.Model
         public  int Id { get; set; }
         public  int PatientId { get; set; }
         public  DateTime StartingDate { get; set; }
-        public  ICollection<MedicalRegistry> MedicalRegistries { get; set; }  
-   
+        public  ICollection<MedicalRegistry> MedicalRegistries { get; set; }
+
     }
 }

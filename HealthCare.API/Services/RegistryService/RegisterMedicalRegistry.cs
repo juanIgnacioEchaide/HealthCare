@@ -1,4 +1,5 @@
 using HealthCare.API.Builders;
+using HealthCare.API.Data;
 using HealthCare.API.DTO;
 using HealthCare.API.Model;
 
@@ -6,32 +7,32 @@ namespace HealthCare.API.Services
 {
     public class RegisterMedicalRegistry 
     {
-        //Todo call 'await unitOfWork.SaveRegistry();
-    /*     public MedicalRegistry createRegistry(MedicalRegistryForCreateDTO dto)
-        {       
-     
-        var _builder = new MedicalRegistryBuilder();
+       private UnitOfWork _uow;
+       
+        public void _createRegistry(MedicalRegistryForCreateDTO dto)
+        {          
+            new MedicalRegistryBuilder()
+                .withMedicalRecordId(dto.PatientId)
+                .withPatient(dto.PatientId)
+                .withHealthCareProvider(dto.HealthCareProviderId)
+                .withDate(dto.DateOfAttendance)
+                .withSummary(dto.Summary)
+                .Build();  
+            _uow.Commit();
+            
+            } 
 
-        
-        MedicalRegistry newMedicalRegistry = _builder
-        . withPatient(dto.Patient) 
-        . withTechnician(dto.Technician)  
-        . withPhysician(dto.Physician)  
-        . withHealthCareProvider(dto.HealthCareProvider) 
-        .buildMedicalRegistry();
+            public void _updateRegistry(MedicalRegistryForCreateDTO dto)
+            {
+                var dbRegistry = _uow.MedicalRegistryRepository.getById(dto.Id);
+                
+                 _uow.DetectChanges();
 
-        return newMedicalRegistry;
-        } */
+            }
 
-        public void deleteRegistry(long Id)
-        {
-
-            throw new System.NotImplementedException();
-        }
-
-        public MedicalRegistry updateRegistry(long Id)
-        {
-            throw new System.NotImplementedException();
-        }
+             public void deleteRegistry(long Id)
+            {
+                _uow.Rollback();
+            }
     }
 }

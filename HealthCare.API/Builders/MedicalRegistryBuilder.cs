@@ -1,77 +1,84 @@
 using System;
+using System.Collections.Generic;
 using HealthCare.API.Data;
-using HealthCare.API.Interfaces;
 using HealthCare.API.Model;
 
 namespace HealthCare.API.Builders
 {
-    public class MedicalRegistryBuilder : IMedicalRegistryBuilder
+    public class MedicalRegistryBuilder
     {
         private readonly UnitOfWork _uow;
+        private MedicalRegistry _medicalRegistry;
+        private int _medicalRecordId;
         private Patient _patient;
-        private MedicalRecord _medicalRecord;
-        private Physician _physician;
         private Technician _technician;
+        private Physician _physician;
         private DateTime _date;
         private HealthCareProvider _healthCareProvider;
         private string _summary;
+        private List<string> _medications;
 
-        public Patient withPatient(int patientId)
+        public MedicalRegistryBuilder withMedicalRecordId(int patientId){
+            
+           var medicalRecordId = _uow.MedicalRecordRepository.GetMedicalRecordByPatientId(patientId).Id;
+            medicalRecordId = _medicalRecordId;
+            return this;
+        }
+        public MedicalRegistryBuilder withPatient(int patientId)
         {
-            return _patient = _uow.PatientRepository.getByPatientId(patientId); /* ?? */
-                                     //dispara el patient service 'crea el patient'
+            var patient = _uow.PatientRepository.getByPatientId(patientId);
+              _patient = patient;    
+            return this;
+        }
+        public MedicalRegistryBuilder withTechnician(int technicianId)
+        {
+            var technician = _uow.TechnicianRepository.getById(technicianId);
+              _technician = technician;
+            return this;
         }
 
-        public MedicalRecord checkForMedicalRecord(int patientId)
+        public MedicalRegistryBuilder withPhysician(int physicianId)
         {
-            return _medicalRecord = _uow.MedicalRecordRepository.GetMedicalRecordByPatientId(patientId)??
-                                    new MedicalRecord(){
-                                        PatientId = patientId,
-                                        StartingDate = DateTime.Now                                   
-                                    };
+            var physician = _uow.PhysicianRepository.getById(physicianId);
+            _physician = physician;
+            return this;
+        }
+        public MedicalRegistryBuilder withDate(DateTime date)
+        {
+            _date = date;
+            return this;
+        }
+        public MedicalRegistryBuilder withHealthCareProvider(int providerId)
+        {
+            var healthCareProvider = _uow.HealthCareProviderRepository.GetById(providerId);
+            _healthCareProvider = healthCareProvider;
+            return this;
         }
 
-        public HealthCareProvider withHealthCareProvider(int providerId)
+        public MedicalRegistryBuilder withSummary(string summary)
         {
-            return _healthCareProvider = _uow.HealthCareProviderRepository.GetById(providerId);
-        } 
-        public Physician withPhysician(int physicianId)
-        {
-            return   physicianId.ToString() == null ?
-                    _physician = null:
-                    _physician = _uow.PhysicianRepository.getById(physicianId);
-        // ?? throw exception
+            _summary = summary;
+            return this;
         }
 
-        public Technician withTechnician(int techicianId)
+        public MedicalRegistryBuilder withMedications(List<string> medications)
         {
-            return   techicianId.ToString() == null ?
-                    _technician = null:
-                    _technician = _uow.TechnicianRepository.getById(techicianId);
+            _medications = medications;
+            return this;
         }
-
-        public DateTime withDate(DateTime date)
+        public MedicalRegistry Build()
         {
-            return _date = date;
+            return new MedicalRegistry(){
+                MedicalRecordId = _medicalRecordId,
+                Patient = _patient,
+                Technician = _technician,
+                Physician = _physician,
+                Date = _date,
+                HealthCareProvider= _healthCareProvider,
+                Medications = _medications,
+                Summary= _summary
+           };  
         }
-
-        public string withSummary(string summary)
-        {
-            return _summary = summary;
-        }
-
-        public MedicalRegistry buildMedicalRegistry(){
-            return new MedicalRegistry()
-                        {
-                        Patient = _patient,
-                        Physician =_physician,
-                        MedicalRecordId = _medicalRecord.Id,
-                        Technician= _technician,
-                        Date =_date,
-                        HealthCareProvider = _healthCareProvider,
-                        Summary = _summary
-                        };
-            }
       
     }
 }
