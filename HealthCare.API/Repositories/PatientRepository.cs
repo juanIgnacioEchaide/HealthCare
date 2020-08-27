@@ -28,9 +28,9 @@ namespace HealthCare.API.Repositories
             => this._context.Patients
             .Where( p => p.FirstName == firstName && p.LastName == lastName)
             .FirstOrDefault();
-        public ICollection<Patient> getByHCProviderName(string provider)
+        public ICollection<Patient> getByHCProviderId(int providerId)
             => this._context.Patients
-            .Where(p => p.CurrentHCProvider.Name == provider)
+            .Where(p => p.HealthCareProviderId == providerId)
             .ToList();      
         public Patient getByMedicalRecordId(int recordId)
             => this._context.Patients

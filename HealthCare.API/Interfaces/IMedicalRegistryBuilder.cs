@@ -6,12 +6,14 @@ using HealthCare.API.Model;
 namespace HealthCare.API.Interfaces
 {
     public interface IMedicalRegistryBuilder{
-       /*  Patient withPatient(int patientId);
-         void checkForMedicalRecord(int patientId);
-         HealthCareProvider withHealthCareProvider(int providerId);
-         DateTime withDate(DateTime date);
-         string withSummary(string summary);
-         MedicalRegistry buildMedicalRegistry();
-       */
+        MedicalRegistryBuilder withMedicalRecordId(int patientId);
+        MedicalRegistryBuilder withPatient(int patientId);
+        MedicalRegistryBuilder withTechnician(int technicianId);
+        MedicalRegistryBuilder withPhysician(int physicianId);
+        MedicalRegistryBuilder withDate(DateTime date);
+        MedicalRegistryBuilder withHealthCareProvider(int providerId);
+        MedicalRegistryBuilder withSummary(string summary);
+        MedicalRegistryBuilder withMedications(List<string> medications);   
+        MedicalRegistry Build();
     }
 }

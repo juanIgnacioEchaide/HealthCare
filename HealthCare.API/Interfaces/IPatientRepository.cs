@@ -8,7 +8,7 @@ namespace HealthCare.API.Interfaces
         Patient getByPatientId(int patientId);
         Patient getBySocialSecurityNumber(int ssNumber);
         Patient getByPatientFullName(string firstName, string lastName);
-        ICollection<Patient> getByHCProviderName(string provider);  
+        ICollection<Patient> getByHCProviderId(int providerId);  
         Patient getByMedicalRecordId(int recordId);
         ICollection<Patient> getAllPatients();
       

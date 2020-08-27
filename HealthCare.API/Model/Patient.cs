@@ -15,7 +15,7 @@ namespace HealthCare.API.Model
         private String Address { get; set; }
 
         //medical data
-        public HealthCareProvider CurrentHCProvider { get; set; }
+        public int HealthCareProviderId { get; set; }
         public MedicalRecord MedicalRecord { get; set; }
         public int HCCredentialNumber { get; set; }
         public ICollection<PatientPhysician> physicians {get;set;}
