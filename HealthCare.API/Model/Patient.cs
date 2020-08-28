@@ -20,5 +20,6 @@ namespace HealthCare.API.Model
         public int HCCredentialNumber { get; set; }
         public ICollection<PatientPhysician> physicians {get;set;}
         public List<PatientTechnician> technicians {get;set;}
+        public List<PatientHospitalization> hospitalizations {get;set;}
     }
 }

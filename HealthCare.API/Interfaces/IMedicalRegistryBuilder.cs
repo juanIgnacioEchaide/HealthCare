@@ -13,7 +13,7 @@ namespace HealthCare.API.Interfaces
         MedicalRegistryBuilder withDate(DateTime date);
         MedicalRegistryBuilder withHealthCareProvider(int providerId);
         MedicalRegistryBuilder withSummary(string summary);
-        MedicalRegistryBuilder withMedications(List<string> medications);   
+        MedicalRegistryBuilder withMedications(ICollection<Medication> medications);   
         MedicalRegistry Build();
     }
 }

@@ -11,7 +11,7 @@ namespace HealthCare.API.Model
         public HealthCareProvider HealthCareProvider { get; set; }
         public Physician Physician { get; set; }
         public Technician Technician  { get; set; }
-        public List<string> Medications {get;set;}
+        public List<MedicalRegistryMedication> Medications {get;set;}
         public string Summary { get; set; }
         public DateTime Date  {get;set;}
     }

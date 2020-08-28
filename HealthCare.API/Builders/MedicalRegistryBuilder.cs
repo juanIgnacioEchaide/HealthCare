@@ -16,7 +16,7 @@ namespace HealthCare.API.Builders
         private DateTime _date;
         private HealthCareProvider _healthCareProvider;
         private string _summary;
-        private List<string> _medications;
+        private List<MedicalRegistryMedication> _medications;
 
         public MedicalRegistryBuilder withMedicalRecordId(int patientId){
             
@@ -61,7 +61,7 @@ namespace HealthCare.API.Builders
             return this;
         }
 
-        public MedicalRegistryBuilder withMedications(List<string> medications)
+        public MedicalRegistryBuilder withMedications(List<MedicalRegistryMedication> medications)
         {
             _medications = medications;
             return this;
