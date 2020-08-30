@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using HealthCare.API.Interfaces;
 
 namespace HealthCare.API.Model
 {

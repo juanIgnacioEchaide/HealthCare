@@ -25,6 +25,23 @@ namespace HealthCare.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Patients",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    SocialSecurityNumber = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    HealthCareProviderId = table.Column<int>(nullable: false),
+                    HCCredentialNumber = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Patients", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Physicians",
                 columns: table => new
                 {
@@ -67,26 +84,24 @@ namespace HealthCare.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Patients",
+                name: "Hospitalizations",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    SocialSecurityNumber = table.Column<int>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    CurrentHCProviderId = table.Column<int>(nullable: true),
-                    HCCredentialNumber = table.Column<int>(nullable: false)
+                    PatientId = table.Column<int>(nullable: false),
+                    IncomeDate = table.Column<DateTime>(nullable: false),
+                    EstimatedLeave = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Patients", x => x.Id);
+                    table.PrimaryKey("PK_Hospitalizations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Patients_HealthCareProviders_CurrentHCProviderId",
-                        column: x => x.CurrentHCProviderId,
-                        principalTable: "HealthCareProviders",
+                        name: "FK_Hospitalizations_Patients_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -206,6 +221,35 @@ namespace HealthCare.API.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Medications",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true),
+                    Fabricant = table.Column<string>(nullable: true),
+                    GenericDrug = table.Column<string>(nullable: true),
+                    PurchaseLot = table.Column<string>(nullable: true),
+                    DateOfPurchase = table.Column<DateTime>(nullable: false),
+                    MedicalRegistryId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Medications", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Medications_MedicalRegistries_MedicalRegistryId",
+                        column: x => x.MedicalRegistryId,
+                        principalTable: "MedicalRegistries",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Hospitalizations_PatientId",
+                table: "Hospitalizations",
+                column: "PatientId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_MedicalRecords_PatientId",
                 table: "MedicalRecords",
@@ -238,14 +282,14 @@ namespace HealthCare.API.Migrations
                 column: "TechnicianId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Medications_MedicalRegistryId",
+                table: "Medications",
+                column: "MedicalRegistryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_PatientPhysicians_PhysicianId",
                 table: "PatientPhysicians",
                 column: "PhysicianId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Patients_CurrentHCProviderId",
-                table: "Patients",
-                column: "CurrentHCProviderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PatientTechnicians_TechnicianId",
@@ -256,13 +300,22 @@ namespace HealthCare.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "MedicalRegistries");
+                name: "Hospitalizations");
+
+            migrationBuilder.DropTable(
+                name: "Medications");
 
             migrationBuilder.DropTable(
                 name: "PatientPhysicians");
 
             migrationBuilder.DropTable(
                 name: "PatientTechnicians");
+
+            migrationBuilder.DropTable(
+                name: "MedicalRegistries");
+
+            migrationBuilder.DropTable(
+                name: "HealthCareProviders");
 
             migrationBuilder.DropTable(
                 name: "MedicalRecords");
@@ -275,9 +328,6 @@ namespace HealthCare.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Patients");
-
-            migrationBuilder.DropTable(
-                name: "HealthCareProviders");
         }
     }
 }

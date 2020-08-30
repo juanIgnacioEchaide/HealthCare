@@ -42,6 +42,28 @@ namespace HealthCare.API.Migrations
                     b.ToTable("HealthCareProviders");
                 });
 
+            modelBuilder.Entity("HealthCare.API.Model.Hospitalization", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("EstimatedLeave")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("IncomeDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("Hospitalizations");
+                });
+
             modelBuilder.Entity("HealthCare.API.Model.MedicalRecord", b =>
                 {
                     b.Property<int>("Id")
@@ -102,6 +124,37 @@ namespace HealthCare.API.Migrations
                     b.HasIndex("TechnicianId");
 
                     b.ToTable("MedicalRegistries");
+                });
+
+            modelBuilder.Entity("HealthCare.API.Model.Medication", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DateOfPurchase")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Fabricant")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GenericDrug")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("MedicalRegistryId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PurchaseLot")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicalRegistryId");
+
+                    b.ToTable("Medications");
                 });
 
             modelBuilder.Entity("HealthCare.API.Model.Patient", b =>
@@ -236,6 +289,15 @@ namespace HealthCare.API.Migrations
                     b.ToTable("Technicians");
                 });
 
+            modelBuilder.Entity("HealthCare.API.Model.Hospitalization", b =>
+                {
+                    b.HasOne("HealthCare.API.Model.Patient", "Patient")
+                        .WithMany("hospitalizations")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("HealthCare.API.Model.MedicalRecord", b =>
                 {
                     b.HasOne("HealthCare.API.Model.Patient", null)
@@ -268,6 +330,15 @@ namespace HealthCare.API.Migrations
                     b.HasOne("HealthCare.API.Model.Technician", "Technician")
                         .WithMany()
                         .HasForeignKey("TechnicianId");
+                });
+
+            modelBuilder.Entity("HealthCare.API.Model.Medication", b =>
+                {
+                    b.HasOne("HealthCare.API.Model.MedicalRegistry", "MedicalRegistry")
+                        .WithMany("Medications")
+                        .HasForeignKey("MedicalRegistryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HealthCare.API.Model.PatientPhysician", b =>
